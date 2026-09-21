@@ -44,6 +44,19 @@ TypeScript · React · SQL · REST API
 
 ---
 
+## Architecture (current, prototype phase)
+
+![Administración architecture](docs/diagrams/admin.architecture.light.svg#gh-light-mode-only)
+![Administración architecture](docs/diagrams/admin.architecture.dark.svg#gh-dark-mode-only)
+
+The only module implemented so far is payroll: a React frontend calls an Eden Treaty
+typed client, which talks to the live Elysia server (`server/index.ts`, the one `bun dev`
+actually runs), which calls the payroll calculation engine. `src/server/` is unused
+scaffolding not wired into the running app — kept out of this diagram since it isn't real
+today.
+
+---
+
 ## 🌐 Ecosistema ARKELYTHEX
 
 | Proyecto | Descripción |
