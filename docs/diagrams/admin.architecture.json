@@ -1,0 +1,66 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "Administración — Payroll Engine (Current, Prototype Phase)",
+    "quality_profile": "showcase",
+    "repository": {
+      "url": "https://github.com/arkelythex/admin",
+      "provider": "github",
+      "revision": "c7df53ea365ba1471fe435bd0caa0b85aec6bc4f"
+    }
+  },
+  "components": [
+    {
+      "id": "frontend",
+      "type": "frontend",
+      "label": "React Frontend",
+      "sublabel": "App shell + payroll calculator UI",
+      "sources": [
+        { "path": "src/App.tsx", "line": 6, "label": "App root" },
+        { "path": "src/modules/payroll/components/PayrollCalculator.tsx", "line": 23, "label": "calculate() call" }
+      ],
+      "pos": [40, 40],
+      "size": [200, 110]
+    },
+    {
+      "id": "eden",
+      "type": "frontend",
+      "label": "Eden Treaty Client",
+      "sublabel": "typed RPC client",
+      "sources": [
+        { "path": "src/lib/eden.ts", "line": 4, "label": "typed client, App from @server" }
+      ],
+      "pos": [290, 40],
+      "size": [200, 110]
+    },
+    {
+      "id": "server",
+      "type": "backend",
+      "label": "Elysia API Server",
+      "sublabel": "live entrypoint (bun run)",
+      "sources": [
+        { "path": "server/index.ts", "line": 13, "label": "POST /api/payroll/calculate" },
+        { "path": "package.json", "line": 7, "label": "dev script runs server/index.ts" }
+      ],
+      "pos": [540, 40],
+      "size": [200, 110]
+    },
+    {
+      "id": "payroll",
+      "type": "backend",
+      "label": "Payroll Engine",
+      "sublabel": "Peru tax/regime calculation",
+      "sources": [
+        { "path": "src/modules/payroll/utils/calculator.ts", "line": 7, "label": "calculatePayroll()" }
+      ],
+      "pos": [790, 40],
+      "size": [200, 110]
+    }
+  ],
+  "connections": [
+    { "from": "frontend", "to": "eden", "label": "typed calls", "labelAt": [265, 164] },
+    { "from": "eden", "to": "server", "label": "HTTP" },
+    { "from": "server", "to": "payroll", "label": "calculatePayroll()", "labelAt": [835, 164] }
+  ]
+}
